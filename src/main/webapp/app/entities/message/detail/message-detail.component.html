@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (message(); as messageRef) {
+      <div>
+        <h2 data-cy="messageDetailsHeading"><span jhiTranslate="tmp3App.message.detail.title">Message</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ messageRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="tmp3App.message.priority">Priority</span></dt>
+          <dd>
+            <span>{{ messageRef.priority }}</span>
+          </dd>
+          <dt><span jhiTranslate="tmp3App.message.topic">Topic</span></dt>
+          <dd>
+            <span>{{ messageRef.topic }}</span>
+          </dd>
+          <dt><span jhiTranslate="tmp3App.message.data">Data</span></dt>
+          <dd>
+            <span>{{ messageRef.data }}</span>
+          </dd>
+          <dt><span jhiTranslate="tmp3App.message.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'tmp3App.Status.' + (messageRef.status ?? 'null')">{{
+              { null: '', RECEIVED: 'RECEIVED', WAITING: 'WAITING', COMPLETED: 'COMPLETED', ERROR: 'ERROR' }[messageRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="tmp3App.message.receivedAt">Received At</span></dt>
+          <dd>
+            <span>{{ messageRef.receivedAt | formatMediumDate }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/message', messageRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
