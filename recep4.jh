@@ -1,0 +1,15 @@
+entity Message {    
+    Priority Integer
+    Topic String
+    Data String
+    Status Status
+    ReceivedAt LocalDate
+    
+}
+
+enum Status {
+	RECEIVED, WAITING, COMPLETED, ERROR
+}
+
+dto * with mapstruct
+service * with serviceClass
