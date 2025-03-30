@@ -1,0 +1,11 @@
+{
+  "tmp3App": {
+    "Status": {
+      "null": "",
+      "RECEIVED": "RECEIVED",
+      "WAITING": "WAITING",
+      "COMPLETED": "COMPLETED",
+      "ERROR": "ERROR"
+    }
+  }
+}

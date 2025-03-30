@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-message-heading" data-cy="MessageCreateUpdateHeading" jhiTranslate="tmp3App.message.home.createOrEditLabel">
+        Create or edit a Message
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="tmp3App.message.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_priority" jhiTranslate="tmp3App.message.priority">Priority</label>
+          <input type="number" class="form-control" name="priority" id="field_priority" data-cy="priority" formControlName="priority" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_topic" jhiTranslate="tmp3App.message.topic">Topic</label>
+          <input type="text" class="form-control" name="topic" id="field_topic" data-cy="topic" formControlName="topic" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_data" jhiTranslate="tmp3App.message.data">Data</label>
+          <input type="text" class="form-control" name="data" id="field_data" data-cy="data" formControlName="data" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="tmp3App.message.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'tmp3App.Status.null' | translate }}</option>
+            @for (status of statusValues; track $index) {
+              <option [value]="status">{{ 'tmp3App.Status.' + status | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_receivedAt" jhiTranslate="tmp3App.message.receivedAt">Received At</label>
+          <div class="input-group">
+            <input
+              id="field_receivedAt"
+              data-cy="receivedAt"
+              type="text"
+              class="form-control"
+              name="receivedAt"
+              ngbDatepicker
+              #receivedAtDp="ngbDatepicker"
+              formControlName="receivedAt"
+            />
+            <button type="button" class="btn btn-secondary" (click)="receivedAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
